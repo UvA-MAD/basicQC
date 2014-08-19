@@ -15,3 +15,7 @@ raw/*
 
 # count tables directory
 counts/*
+
+# snakemake stuff
+snakemake/*
+
