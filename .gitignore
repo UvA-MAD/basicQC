@@ -6,3 +6,12 @@
 
 # R data files from past sessions
 .Rdata
+
+# design file
+seqdesign.txt
+
+# raw fastq direcotry
+raw/*
+
+# count tables directory
+counts/*
