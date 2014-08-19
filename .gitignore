@@ -17,5 +17,5 @@ raw/*
 counts/*
 
 # snakemake stuff
-snakemake/*
+.snakemake/*
 
