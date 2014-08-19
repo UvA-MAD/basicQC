@@ -13,6 +13,11 @@ seqdesign.txt
 # raw fastq direcotry
 raw/*
 
+# Knitring results
+basicQC.md
+basicQC.html
+figure/*
+
 # count tables directory
 counts/*
 
