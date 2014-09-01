@@ -6,11 +6,12 @@ import os
 import sys
 
 
-def sample_sff2fq(sample_data, sff_home, analysis_home):
+def sample_sff2fq(sample_info):
     """
     For each sampleid generate fatq file(s) from sff.
     """
-
+    # unpack arguments
+    sample_data, sff_home, analysis_home = sample_info
     raw_dir = os.path.join(analysis_home, "raw")
     # patttern of sff file names
     sff_pattern = '^IonXpress(RNA)?_0%s_R_[0-9]{4}_([0-9]{2}_){5}user_PRO-[0-9]*-%s.sff$'
@@ -63,9 +64,10 @@ def main(argv):
     parser.add_argument('-a', '--analysis_home',
                         type=str,
                         help="path to target directory with analysis")
-    parser.add_argument('-p', '--parallel',
-                        default=False, action='store_true',
-                        help="run in parallel")
+    parser.add_argument('-n', '--numthreads',
+                        default=1,
+                        type=int,
+                        help="number of threads, max 10")
 
     # print help if no command line arguments have been used
     if len(sys.argv) == 1:
@@ -93,23 +95,26 @@ def main(argv):
     if not os.path.exists(raw_dir):
         os.makedirs(raw_dir)
 
-    if args.parallel:
+    numthreads = int(args.numthreads)
+    if numthreads > 1:
+        # max threads is 10
+        n = (10 if numthreads > 10 else numthreads)
         import multiprocessing
-        jobs = []
+        arguments = []
         for sampleid in samples:
             # rows corresponding to particular sample
             # more than one if sample has been run in multiple runs
             sample_data = df[df['sampleid'] == sampleid]
-            p = multiprocessing.Process(target=sample_sff2fq,
-                                        args=(sample_data,
-                                              args.sff_home,
-                                              args.analysis_home))
-            jobs.append(p)
-            p.start()
+            arguments.append((sample_data,
+                              args.sff_home,
+                              args.analysis_home))
+
+        pool = multiprocessing.Pool(processes=n)
+        pool.map(sample_sff2fq, arguments)
     else:
         for sampleid in samples:
             sample_data = df[df['sampleid'] == sampleid]
-            sample_sff2fq(sample_data, args.sff_home, args.analysis_home)
+            sample_sff2fq((sample_data, args.sff_home, args.analysis_home))
 
 if __name__ == "__main__":
     main(sys.argv[1:])

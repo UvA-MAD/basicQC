@@ -40,4 +40,4 @@ rule get_fq:
     input: DESIGN_FILE
     output: FASTQS
     message: "Importing fastq from sff"
-    shell: "python get_experiment_fq.py -d {DESIGN_FILE} -s {SFF_STORE} -a {ANALYSIS_HOME}"
+    shell: "python get_experiment_fq.py -d {DESIGN_FILE} -s {SFF_STORE} -a {ANALYSIS_HOME} -n 1"
