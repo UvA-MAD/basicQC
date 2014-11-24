@@ -15,7 +15,7 @@ df = pd.read_csv(DESIGN_FILE, sep="\t")
 colnames = list(df.columns)
 colnames[0] = colnames[0].lower()
 df.columns = colnames
-SAMPLES = list(set(df['sampleid']))
+SAMPLES = [str(sample) for sample in list(set(df['sampleid']))]
 FASTQS = [ "./raw/" + s + ".fastq" for s in SAMPLES]
 
 rule bootstrap:
