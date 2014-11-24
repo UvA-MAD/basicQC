@@ -403,13 +403,13 @@ Requires: digest, evaluate, formatR, highr, markdown, stringr
 
 Package: knitrBootstrap
 Source: github
-Version: 1.0.0
-Hash: 76c41f035d59470b4c9d3f4858161861d5e07d9b
-Requires: knitr, markdown, rmarkdown
+Version: 0.9.0
+Hash: f609e84c5c866a499054adc82b045ddbcf302547
+Requires: knitr, markdown
 GithubRepo: knitrBootstrap
 GithubUsername: jimhester
-GithubRef: master
-GithubSha1: 76c41f035d59470b4c9d3f4858161861d5e07d9b
+GithubRef: knitrBootstrap-0.9.0
+GithubSha1: f609e84c5c866a499054adc82b045ddbcf302547
 
 Package: labeling
 Source: CRAN
