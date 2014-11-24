@@ -3,24 +3,19 @@
 
 # Example code in package build process
 *-Ex.R
-
 # R data files from past sessions
 .Rdata
-
 # design file
 seqdesign.txt
-
 # raw fastq direcotry
 raw/*
-
 # Knitring results
 basicQC.md
 basicQC.html
 figure/*
-
 # count tables directory
 counts/*
-
 # snakemake stuff
 .snakemake/*
-
+packrat/lib*/
+packrat/src/
